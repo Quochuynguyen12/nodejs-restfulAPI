@@ -1,0 +1,21 @@
+
+const express = require("express")
+const mongoose = require('mongoose');
+
+
+mongoose.connect("mongodb://localhost:27017/DbStudent");
+
+const accountSchenma = new mongoose.Schema({
+    username: String,
+    password: String
+})
+const accountModel = mongoose.model("acount", accountSchenma);
+
+accountModel.find({})
+    .then(function (data) {
+        console.log("data", data)
+    })
+    .catch(function (err) {
+        console.log("err", err);
+    })
+module.exports = accountModel;
