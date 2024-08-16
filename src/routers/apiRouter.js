@@ -1,10 +1,13 @@
 const express = require('express');
 var router = express.Router();
-const { createaccount } = require("../controllers/homecontroller");
+const { createaccount, getAllAccounts, updateAccounts, deleteOneAccount } = require("../controllers/homecontroller");
 const conn = require("../config/connectDB");
 
 
 router.post("/appaccount", createaccount);
+router.get("/getallaccounts", getAllAccounts)
+router.put("/updataaccounts/:id", updateAccounts)
+router.delete("/delete/:id", deleteOneAccount)
 router.get("/", (req, res, next) => {
     conn.find({})
         .then(data => {

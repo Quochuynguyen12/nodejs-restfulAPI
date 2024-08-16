@@ -5,33 +5,60 @@ const router = require("../routers/apiRouter");
 
 
 const createaccount = (req, res) => {
-    const username = req.body.username;
-    const password = req.body.password;
+    var username = req.body.username;
+    var password = req.body.password;
 
-    conn.findOne({ username: username })
+    // for(let i; i< 20; i++){
+    conn.create({
+        username: username,
+        password: password
+    })
+
         .then(data => {
-            if (data) {
-                res.json("user đã tồn tại");
-            } else {
-                return bcrypt.hash(password, saltRounds)
-                    .then(hashedPassword => {
-                        return conn.create({
-                            username: username,
-                            password: hashedPassword
-                        });
-                    });
-            }
-        })
-        .then(data => {
-            if (data) {
-                res.json("tạo tài khoản thành công");
-            }
+            res.json("them thanh cong");
         })
         .catch(err => {
-            console.error(err);
-            res.status(500).json("không thành công");
-        });
+            res.status(500).json("fall server");
+        })
+    // }
 }
-module.exports = createaccount;
+
+const getAllAccounts = (req, res) => {
+    conn.find({})
+        .then(data => {
+            res.json(data);
+        })
+        .catch(err => {
+            res.json(500).json("not get All data")
+        })
+}
+const updateAccounts = (req, res) => {
+    var id = req.params.id;
+    var newpassword = req.body.password;
+    conn.findByIdAndUpdate(id, {
+        password: newpassword
+
+    })
+        .then(data => {
+            res.json("update thanh cong")
+        })
+        .catch(err => {
+            res.status(500).json("fall");
+        })
+}
+const deleteOneAccount = (req, res) => {
+    var id = req.params.id;
+
+    conn.deleteOne({
+        _id: id
+    })
+        .then(data => {
+            res.json("deleted");
+        })
+        .catch(err => {
+            res.status(500).json("can't delete")
+        })
+}
+module.exports = { createaccount, getAllAccounts, updateAccounts, deleteOneAccount };
 
 //test 
