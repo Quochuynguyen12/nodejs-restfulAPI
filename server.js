@@ -97,7 +97,7 @@ app.post("/login", (req, res, next) => {
 
 // app.use("/api/v1", router);
 app.use("/api/account", router);
-// app.use("/", router);
+app.use("/", router);
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
