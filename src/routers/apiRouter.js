@@ -1,6 +1,7 @@
 const express = require('express');
 var router = express.Router();
-const { createaccount, getAllAccounts, updateAccounts, deleteOneAccount } = require("../controllers/homecontroller");
+const path = require("path");
+const { createaccount, getAllAccounts, updateAccounts, deleteOneAccount, pagination } = require("../controllers/homecontroller");
 const conn = require("../config/connectDB");
 
 
@@ -8,6 +9,10 @@ router.post("/appaccount", createaccount);
 router.get("/getallaccounts", getAllAccounts)
 router.put("/updataaccounts/:id", updateAccounts)
 router.delete("/delete/:id", deleteOneAccount)
+router.get("/Account", pagination)
+router.get("/home", (req, res, next) => {
+    res.sendFile(path.join(__dirname, "index.html"));
+})
 router.get("/", (req, res, next) => {
     conn.find({})
         .then(data => {

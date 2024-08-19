@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const path = require("path");
 const app = express();
 const port = process.env.PORT || 5000
 require("dotenv").config;
@@ -11,6 +12,7 @@ const controllers = require("./src/controllers/homecontroller");
 
 app.use(bodyparser.urlencoded({ extended: false }))
 app.use(bodyparser.json())
+app.use('/public', express.static(path.join(__dirname, '/public')))
 // const checklogin = (req , res , next) => {
 //     if(dangnhap){
 //         req.user = user

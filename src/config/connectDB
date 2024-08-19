@@ -11,13 +11,13 @@ const accountSchenma = new mongoose.Schema({
 })
 const accountModel = mongoose.model("acount", accountSchenma);
 
-accountModel.find({})
-    .then(function (data) {
-        console.log("data", data)
-    })
-    .catch(function (err) {
-        console.log("err", err);
-    })
+// accountModel.find({})
+//     .then(function (data) {
+//         console.log("data", data)
+//     })
+//     .catch(function (err) {
+//         console.log("err", err);
+//     })
 
 
 // for (let i = 0; i < 20; i++) {
