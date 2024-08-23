@@ -8,11 +8,15 @@ const router = require("./src/routers/apiRouter");
 const bodyparser = require("body-parser");
 const conn = require("./src/config/connectDB");
 const controllers = require("./src/controllers/homecontroller");
+// const viewEngine = require("./src/config/viewEngine");
 
-
+// viewEngine(app);
 app.use(bodyparser.urlencoded({ extended: false }))
 app.use(bodyparser.json())
-app.use('/public', express.static(path.join(__dirname, '/public')))
+app.use('/public', express.static(path.join(__dirname, 'src/public')))
+app.get("/home", (req, res, next) => {
+    res.sendFile(path.join(__dirname, './src/public/index.html'));
+})
 // const checklogin = (req , res , next) => {
 //     if(dangnhap){
 //         req.user = user
@@ -24,8 +28,7 @@ app.use('/public', express.static(path.join(__dirname, '/public')))
 // }
 
 // mongoose.connect("mongodb://localhost:27017/DbStudent");
-
-// const accountSchenma = new mongoose.Schem   a({
+// const accountSchenma = new mongoose.Schema({
 //     username: String,
 //     password: String
 // })

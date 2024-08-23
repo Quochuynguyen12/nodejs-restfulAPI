@@ -10,9 +10,9 @@ router.get("/getallaccounts", getAllAccounts)
 router.put("/updataaccounts/:id", updateAccounts)
 router.delete("/delete/:id", deleteOneAccount)
 router.get("/Account", pagination)
-router.get("/home", (req, res, next) => {
-    res.sendFile(path.join(__dirname, "index.html"));
-})
+// router.get("/home" , (req,res,next)=>{
+//     res.sendFile(path.join(__dirname, './src/public/index.html'));
+// })
 router.get("/", (req, res, next) => {
     conn.find({})
         .then(data => {
